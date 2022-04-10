@@ -1,5 +1,7 @@
 package com.bestrookie.test;
 
+import com.bestrookie.sort.Quike;
+
 import java.util.Arrays;
 
 /**
@@ -9,7 +11,8 @@ import java.util.Arrays;
 public class test {
     public static void main(String[] args) {
         TestMain testMain = new TestMain();
-        Integer[] a = {4,6,8,9,2,10,1,3,5};
+        Quike quike = new Quike();
+        Integer[] a = {1,2,5,6,7,9,8,3};
         System.out.println("排列前顺序："+ Arrays.toString(a));
         testMain.sort(a);
         System.out.println("排列后顺序"+ Arrays.toString(a));

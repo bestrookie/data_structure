@@ -7,59 +7,52 @@ package com.bestrookie.test;
 public class TestMain {
     private static Comparable[] assist;
     public void sort(Comparable[] array){
-        assist = new Comparable[array.length];
         int lo = 0;
-        int hi = array.length-1;
+        int hi = array.length-1;;
         sort(array,lo,hi);
-
     }
-
-
-    private void sort(Comparable[] array,int lo,int hi){
+    public void sort(Comparable[]a,int lo,int hi){
         if (hi <= lo){
             return;
         }
-
-        int mid  = lo + (hi - lo) / 2;
-        sort(array,lo,mid);
-        sort(array,mid + 1,hi);
-        merge(array,lo,mid,hi);
-
+        int index = getIndex(a, lo, hi);
+        sort(a,lo,index-1);
+        sort(a,index+1,hi);
     }
-    private void merge(Comparable []a,int lo ,int mid,int hi){
-        int i = lo;
-        int p1 = lo;
-        int p2 = mid + 1;
-        while (p1<=mid && p2<= hi){
+    public int getIndex(Comparable[] a,int lo,int hi){
+        Comparable key = a[lo];
+        int left = lo;
+        int right = hi + 1;
+        while (true){
+            while (less(key,a[--right])){
+                if (right == left){
+                    break;
+                }
+            }
+            while (less(a[++left],key)){
+                if (left == right){
+                    break;
+                }
+            }
 
-            if (less(a[p1],a[p2])){
-                assist[i++] = a[p1++];
-            }else {
-                assist[i++] = a[p2++];
+            if (left >= right){
+                break;
+            }else{
+                swap(a,left,right);
             }
         }
-
-        while (p1 <= mid){
-            assist[i++] = a[p1++];
-        }
-
-        while (p2 <= hi){
-            assist[i++] = a[p2++];
-        }
-
-        if (hi + 1 - lo >= 0) {
-            System.arraycopy(assist, lo, a, lo, hi + 1 - lo);
-        }
-
+        swap(a,lo,right);
+        return right;
     }
+
     private Boolean less(Comparable a, Comparable b){
         return a.compareTo(b) < 0;
     }
-    private Boolean greater(int a , int b){
-        return a > b;
+    private Boolean greater(Comparable a , Comparable b){
+        return a.compareTo(b)>0;
     }
-    private void swap(int [] a , int i , int j){
-        int index = a[i];
+    private void swap(Comparable [] a , int i , int j){
+        Comparable index = a[i];
         a[i] = a[j];
         a[j] = index;
     }
