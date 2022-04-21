@@ -1,11 +1,12 @@
 package com.bestrookie.link;
 
+import java.util.Iterator;
 /**
  * @author bestrookie
  * @version 1.0
  * @date 2022/4/18 22:30
  */
-public class SquuenceList<T> {
+public class SquuenceList<T> implements Iterable<T>{
     private T[] num;
     private int N;
     public SquuenceList(int size){
@@ -57,5 +58,27 @@ public class SquuenceList<T> {
             }
         }
         return -1;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new SIterator();
+    }
+
+    private class SIterator implements Iterator{
+        private int cusor;
+        public SIterator(){
+            this.cusor = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return cusor < N;
+        }
+
+        @Override
+        public Object next() {
+            return num[cusor++];
+        }
     }
 }

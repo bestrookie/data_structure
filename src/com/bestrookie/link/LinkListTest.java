@@ -1,23 +1,22 @@
 package com.bestrookie.link;
-
-import org.w3c.dom.Node;
+import java.util.Iterator;
 
 /**
  * @author bestrookie
  * @version 1.0
  * @date 2022/4/19 22:24
  */
-public class LinkListTest<T> {
-    private Node<T> head;
+public class LinkListTest<T> implements Iterable<T> {
+    private Node head;
     private int n;
 
     public LinkListTest(){
-        this.head = null;
+        this.head = new Node(null,null);
         n = 0;
     }
 
     public void clean(){
-        this.head = null;
+        this.head.next = null;
         this.n = 0;
     }
 
@@ -25,7 +24,7 @@ public class LinkListTest<T> {
         return n == 0;
     }
     public T get(int i){
-        Node<T> current = head;
+        Node current = head.next;
         for (int j = 0; j < i ; j++) {
             current = current.next;
         }
@@ -33,37 +32,37 @@ public class LinkListTest<T> {
     }
 
     public void insert(T t){
-        Node<T> current = head;
+        Node current = head;
         while (current.next != null){
             current = current.next;
         }
-        current.next = new Node<>(t,null);
+        current.next = new Node(t,null);
         n++;
     }
 
     public void insert(T t,int i){
-        Node<T> current = head;
+        Node current = head;
         for (int index = 0 ; index < i ; i++){
             current = current.next;
         }
-        Node<T> nowNode = current.next;
-        current.next= new Node<>(t, nowNode);
+        Node nowNode = current.next;
+        current.next= new Node(t, nowNode);
         n++;
     }
 
     public T remove(int i){
-        Node<T> prve = head;
+        Node prve = head;
         for (int j = 0; j < i; j++) {
             prve = prve.next;
         }
-        Node<T> current = prve.next;
+        Node current = prve.next;
         prve.next = current.next;
         n--;
         return current.item;
     }
 
     public int indexOf(T t){
-        Node<T> prve = head;
+        Node prve = head;
 
         for (int i = 0; i < n; i++) {
             prve = prve.next;
@@ -74,15 +73,39 @@ public class LinkListTest<T> {
         return -1;
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new MyIterator();
+    }
+
+    private class MyIterator implements Iterator{
+        private Node n ;
+        public MyIterator(){
+            this.n  = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return n.next != null;
+        }
+
+        @Override
+        public Object next() {
+            n = n.next;
+            return n.item;
+        }
+    }
 
 
+    private class Node{
+        //存储数据
+        T item;
+        //下一个节点
+        Node next;
 
-   private class Node<T>{
-       public T item;
-       public LinkListTest<T>.Node<T> next;
-       public Node(T item, LinkListTest<T>.Node<T> next){
-           this.item = item;
-           this.next = next;
-       }
-   }
+        public Node(T item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
+    }
 }
