@@ -11,6 +11,46 @@ public class TwoLinkList<T> {
     private MyNode head;
     private MyNode last;
     private int N;
+
+    public TwoLinkList(){
+        this.head = new MyNode(null,null,null);
+        this.last = new MyNode(null,null,null);
+        this.N = 0;
+    }
+    public void clean(){
+        this.head.next = null;
+        this.last = null;
+        this.N = 0;
+    }
+    public Boolean isEmpty(){
+        return N == 0;
+    }
+    public Integer length(){
+        return N;
+    }
+    public T getFirst(){
+        if (isEmpty()){
+            return null;
+        }
+        return head.next.item;
+    }
+    public T getLast(){
+        if (isEmpty()){
+            return null;
+        }
+        return last.item;
+    }
+
+
+
+
+
+
+
+
+
+
+
     private class MyNode{
         public T item;
         private MyNode pre;
@@ -20,7 +60,5 @@ public class TwoLinkList<T> {
             this.pre = pre;
             this.next = next;
         }
-
-
     }
 }
