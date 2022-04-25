@@ -2,12 +2,14 @@ package com.bestrookie.link;
 
 import org.w3c.dom.Node;
 
+import java.util.Iterator;
+
 /**
  * @author bestrookie
  * @version 1.0
  * @date 2022/4/24 22:35
  */
-public class TwoLinkList<T> {
+public class TwoLinkList<T> implements Iterable<T>{
     private MyNode head;
     private MyNode last;
     private int N;
@@ -41,14 +43,83 @@ public class TwoLinkList<T> {
         return last.item;
     }
 
+    public void insert(T t){
+        if (isEmpty()){
+            last = new MyNode(t, head, null);
+            head.next = last;
+        }else {
+            MyNode orderLast = last;
+            MyNode newNode = new MyNode(t, last, null);
+            orderLast.next = newNode;
+            last = newNode;
+        }
+        N++;
+    }
 
+    public void insert(T t,int i){
+        MyNode pre = this.head;
+        for (int j = 0; j < i; j++) {
+            pre = pre.next;
+        }
+        MyNode curr = pre.next;
+        MyNode newNode = new MyNode(t, pre, curr);
+        pre.next = newNode;
+        curr.pre = newNode;
+        N++;
+    }
 
+    public T get(int i){
+        MyNode pre = head.next;
+        for (int j = 0; j < i; j++) {
+            pre = pre.next;
+        }
+        return pre.item;
+    }
 
+    public int getIndexOf(T t){
+        MyNode pre = head;
+        for (int i = 0; pre.next != null ; i++) {
+            pre = pre.next;
+            if (pre.item.equals(t)){
+                return i;
+            }
+        }
+        return -1;
+    }
 
+    public T remove(int i){
+        MyNode pre = head;
+        for (int j = 0; j < i ; j++) {
+            pre = pre.next;
+        }
+        MyNode curr = pre.next;
+        MyNode next = curr.next;
+        pre.next = next;
+        next.pre = pre;
+        N--;
+        return curr.item;
+    }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new MyIterator();
+    }
+    private class MyIterator implements Iterator{
+        MyNode node;
+        public MyIterator(){
+            this.node = head;
+        }
+        @Override
+        public boolean hasNext() {
+            return node.next != null;
+        }
 
-
-
+        @Override
+        public Object next() {
+            node = node.next;
+            return node.item;
+        }
+    }
 
 
     private class MyNode{
