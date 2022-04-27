@@ -96,6 +96,22 @@ public class LinkListTest<T> implements Iterable<T> {
         }
     }
 
+    public void reverse(){
+        if (isEmpty()){
+            return;
+        }
+        reverse(head.next);
+    }
+    public Node reverse(Node curr){
+        if (curr.next == null){
+            head.next = curr;
+            return curr;
+        }
+        Node reverse = reverse(curr.next);
+        reverse.next = curr;
+        curr.next = null;
+        return curr;
+    }
 
     private class Node{
         //存储数据

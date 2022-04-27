@@ -16,12 +16,14 @@ public class TestLinList {
         list.insert(4);
         list.insert(5);
         list.insert(0,0);
-        list.remove(1);
-        System.out.println(list.get(0));
-        System.out.println(list.indexOf(3));
-        System.out.println("============");
         for (Integer integer : list) {
             System.out.println(integer);
         }
+        System.out.println("============");
+        list.reverse();
+        for (Integer integer : list) {
+            System.out.println(integer);
+        }
+
     }
 }

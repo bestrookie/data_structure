@@ -1,9 +1,5 @@
 package com.bestrookie.link;
-
-import org.w3c.dom.Node;
-
 import java.util.Iterator;
-
 /**
  * @author bestrookie
  * @version 1.0
