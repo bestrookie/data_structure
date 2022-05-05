@@ -1,8 +1,5 @@
 package com.bestrookie.link;
 
-
-import org.w3c.dom.Node;
-
 /**
  * @author bestrookie
  * @version 1.0

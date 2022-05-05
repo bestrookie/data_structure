@@ -107,10 +107,11 @@ public class LinkListTest<T> implements Iterable<T> {
             head.next = curr;
             return curr;
         }
-        Node reverse = reverse(curr.next);
-        reverse.next = curr;
+        Node pre = reverse(curr.next);
+        pre.next = curr;
         curr.next = null;
         return curr;
+
     }
 
     private class Node{
