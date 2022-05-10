@@ -3,7 +3,7 @@ package com.bestrookie.stack;
 /**
  * @author bestrookie
  * @date 2022/5/9 11:30
- * 本方法是 学习与LeetCode结合
+ * 本方法是 数据结构资料与LetCode结合
  */
 public class BracketMatch {
     public static void main(String[] args) {
