@@ -4,7 +4,7 @@ package com.bestrookie.symbol;
  * @author bestrookie
  * @date 2022/5/12 16:32
  */
-public class SymbolTable<Key,Value> {
+public class SymbolTable<Key extends Comparable<Key>,Value>{
     private TableNode head;
     private int N;
 
@@ -32,20 +32,18 @@ public class SymbolTable<Key,Value> {
     }
     
     public void put(Key key,Value value){
-        TableNode n = head;
-        N++;
-        while (n.next!= null){
-            if (n.next.key.equals(key)){
-                n.value = value;
-                return;
-            }
-            n = n.next;
+        TableNode curr = head.next;
+        TableNode pre = head;
+        while (curr != null && key.compareTo(curr.key)>0){
+            pre = curr;
+            curr = curr.next;
         }
-
-        TableNode orderFirst = head.next;
-        TableNode newNode = new TableNode(key, value, null);
-        head.next = newNode;
-        newNode.next = orderFirst;
+        if (curr != null && key.compareTo(curr.key) == 0){
+            curr.value = value;
+            return;
+        }
+        pre.next = new TableNode(key,value,curr);
+        N++;
     }
 
     public void remove(Key key){
