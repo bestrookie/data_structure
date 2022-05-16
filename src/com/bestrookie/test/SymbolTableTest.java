@@ -11,8 +11,8 @@ public class SymbolTableTest {
         SymbolTable<Integer, String> table = new SymbolTable<>();
         table.put(1,"a");
         table.put(2,"b");
-        table.put(3,"c");
-        table.remove(2);
+        table.put(4,"c");
+        table.put(3,"aa");
         System.out.println(table.get(1));
     }
 }
