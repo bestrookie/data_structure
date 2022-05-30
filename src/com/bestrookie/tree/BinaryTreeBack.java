@@ -1,5 +1,7 @@
 package com.bestrookie.tree;
 
+import com.bestrookie.queue.MyQueue;
+
 /**
  * @author bestrookie
  * @version 1.0
@@ -126,6 +128,26 @@ public class BinaryTreeBack<Key extends Comparable<Key>,Value> {
             return max(x.right);
         }
         return x;
+
+    }
+
+    public MyQueue<Key> preErgodic(){
+        MyQueue<Key> keys = new MyQueue<>();
+        preErgodic(root,keys);
+        return keys;
+    }
+    public void preErgodic(NodeTree x,MyQueue<Key> keys){
+        if (x == null){
+            return;
+        }
+        keys.enQueue(x.key);
+
+        if (x.left != null){
+            preErgodic(x.left,keys);
+        }
+        if (x.right != null){
+            preErgodic(x.right,keys);
+        }
 
     }
 

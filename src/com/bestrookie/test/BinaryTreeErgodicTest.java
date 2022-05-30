@@ -2,6 +2,7 @@ package com.bestrookie.test;
 
 import com.bestrookie.queue.MyQueue;
 import com.bestrookie.tree.BinaryTree;
+import com.bestrookie.tree.BinaryTreeBack;
 
 /**
  * @author bestrookie
@@ -19,10 +20,12 @@ public class BinaryTreeErgodicTest {
         tree.put("F",6);
         tree.put("H",8);
         tree.put("C",3);
-        MyQueue<String> keys = tree.preErgodic();
+        MyQueue<String> keys = tree.layerErgodic();
         for (String key : keys) {
             Integer value = tree.get(key);
             System.out.println(key +" ------ "+ value);
         }
+
+        System.out.println(tree.maxDepth()+"=================");
     }
 }

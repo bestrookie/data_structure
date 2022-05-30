@@ -129,6 +129,10 @@ public class BinaryTree <Key extends Comparable<Key>,Value>{
         }
     }
 
+    /**
+     * 前序遍历
+     * @return keys
+     */
     public MyQueue<Key> preErgodic(){
         MyQueue<Key> keys = new MyQueue<>();
         preErgodic(root,keys);
@@ -147,6 +151,88 @@ public class BinaryTree <Key extends Comparable<Key>,Value>{
         if (x.right != null){
             preErgodic(x.right,keys);
         }
+    }
+
+    /**
+     * 中序遍历
+     * @return keys
+     */
+    public MyQueue<Key> midErgodic(){
+        MyQueue<Key> keys = new MyQueue<>();
+        midErgodic(root,keys);
+        return keys;
+    }
+
+    public void midErgodic(TreeNode x,MyQueue<Key> keys){
+        if (x == null){
+            return;
+        }
+        if (x.left != null){
+            midErgodic(x.left,keys);
+        }
+        keys.enQueue(x.key);
+        if (x.right != null){
+            midErgodic(x.right,keys);
+        }
+    }
+
+    public MyQueue<Key> afterErgodic(){
+        MyQueue<Key> keys = new MyQueue<>();
+        afterErgodic(root,keys);
+        return keys;
+    }
+
+    public void afterErgodic(TreeNode x,MyQueue<Key> keys){
+        if (x == null){
+            return;
+        }
+        if (x.left != null){
+            afterErgodic(x.left,keys);
+        }
+        if (x.right != null){
+            afterErgodic(x.right,keys);
+        }
+        keys.enQueue(x.key);
+    }
+
+    public MyQueue<Key> layerErgodic(){
+        MyQueue<Key> keys = new MyQueue<>();
+        MyQueue<TreeNode> nodes = new MyQueue<>();
+
+        nodes.enQueue(root);
+        while (!nodes.isEmpty()){
+            TreeNode node = nodes.deQueue();
+            keys.enQueue(node.key);
+            if (node.left != null){
+                nodes.enQueue(node.left);
+            }
+            if (node.right != null){
+                nodes.enQueue(node.right);
+            }
+        }
+        return keys;
+    }
+
+    public int maxDepth(){
+        return maxDepth(root);
+
+    }
+    private int maxDepth(TreeNode x){
+        if (x == null){
+            return 0;
+        }
+        int max = 0;
+        int maxL = 0;
+        int maxR = 0;
+        if (x.left != null){
+            maxL = maxDepth(x.left);
+        }
+        if (x.right != null){
+            maxR = maxDepth(x.right);
+        }
+
+        max = maxL > maxR ? maxL + 1 : maxR + 1;
+        return max;
     }
 
 
