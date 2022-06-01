@@ -11,7 +11,7 @@ import com.bestrookie.tree.BinaryTreeBack;
  */
 public class BinaryTreeErgodicTest {
     public static void main(String[] args) {
-        BinaryTree<String,Integer> tree = new BinaryTree<>();
+        BinaryTreeBack<String,Integer> tree = new BinaryTreeBack<>();
         tree.put("E",5);
         tree.put("B",2);
         tree.put("G",7);

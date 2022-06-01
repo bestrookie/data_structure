@@ -2,6 +2,8 @@ package com.bestrookie.tree;
 
 import com.bestrookie.queue.MyQueue;
 
+import javax.swing.tree.TreeNode;
+
 /**
  * @author bestrookie
  * @version 1.0
@@ -149,6 +151,82 @@ public class BinaryTreeBack<Key extends Comparable<Key>,Value> {
             preErgodic(x.right,keys);
         }
 
+    }
+
+    public MyQueue<Key> midErgodic(){
+        MyQueue<Key> keys = new MyQueue<>();
+        midErgodic(root,keys);
+        return keys;
+    }
+    public void midErgodic(NodeTree x,MyQueue<Key> keys){
+        if (x == null){
+            return;
+        }
+        if (x.left != null){
+            midErgodic(x.left,keys);
+        }
+        keys.enQueue(x.key);
+        if (x.right != null){
+            midErgodic(x.right,keys);
+        }
+    }
+
+    public MyQueue<Key> afterErgodic(){
+        MyQueue<Key> keys = new MyQueue<>();
+        afterErgodic(root,keys);
+        return keys;
+    }
+
+    public void afterErgodic(NodeTree x,MyQueue<Key> keys){
+        if (x == null){
+            return;
+        }
+        if (x.left != null){
+            afterErgodic(x.left,keys);
+        }
+        if (x.right != null){
+            afterErgodic(x.right,keys);
+        }
+        keys.enQueue(x.key);
+    }
+
+    public MyQueue<Key> layerErgodic(){
+        MyQueue<Key> keys = new MyQueue<>();
+        MyQueue<NodeTree> nodes = new MyQueue<>();
+        nodes.enQueue(root);
+
+        while (!nodes.isEmpty()){
+            NodeTree node = nodes.deQueue();
+            keys.enQueue(node.key);
+            if (node.left != null){
+                nodes.enQueue(node.left);
+            }
+            if (node.right != null){
+                nodes.enQueue(node.right);
+            }
+        }
+        return keys;
+    }
+
+    public int maxDepth(){
+        return maxDepth(root);
+    }
+
+    public int maxDepth(NodeTree x){
+        int max = 0;
+        int maxL = 0;
+        int maxR = 0;
+        if ( x == null ){
+            return 0;
+        }
+        if (x.left != null){
+            maxL = maxDepth(x.left);
+        }
+        if (x.right != null){
+            maxR = maxDepth(x.right);
+        }
+        max = maxL > maxR ? maxL + 1 : maxR + 1;
+        return max;
     }
 
 
