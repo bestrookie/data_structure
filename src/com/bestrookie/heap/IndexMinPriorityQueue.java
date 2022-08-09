@@ -67,6 +67,7 @@ public class IndexMinPriorityQueue <T extends Comparable<T>>{
 
     public int delMin(){
         int minIndex = indexMap[1];
+//        indexMap[1] = indexMap[N];
         swap(1,N);
         reverseMap[indexMap[N]] = -1;
         indexMap[N] = -1;
@@ -76,13 +77,50 @@ public class IndexMinPriorityQueue <T extends Comparable<T>>{
         return minIndex;
     }
 
+    public void delIndex(int i){
+        int targetIndex = reverseMap[i];
+        swap(targetIndex,N);
+        reverseMap[indexMap[N]] = -1;
+        indexMap[N] = -1;
+        items[i] = null;
+        N--;
+        swim(targetIndex);
+        sink(targetIndex);
+    }
+
+    public void changeItem(int i,T t){
+        items[i] = t;
+        int indexMap = reverseMap[i];
+        swim(indexMap);
+        sink(indexMap);
+    }
+
     private void swim(int i){
+        while (i > 1){
+            if (less(i / 2,i)){
+                break;
+            }
+            swap(i/2,i);
+            i = i / 2;
+        }
 
 
     }
 
     private void sink(int i){
-
+        while (2 * i <= N){
+            int minIndex;
+            if (2*i+1 <= N){
+                minIndex = less(2*i,2*i+1) ? 2*i : 2*i+1;
+            }else {
+                minIndex = 2*i;
+            }
+            if (less(i,minIndex)){
+                break;
+            }
+            swap(i,minIndex);
+            i = minIndex;
+        }
     }
 
 
