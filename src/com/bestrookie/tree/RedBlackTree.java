@@ -1,8 +1,6 @@
 package com.bestrookie.tree;
 
 
-import com.bestrookie.heap.IndexMinPriorityQueueBack;
-
 /**
  * @author bestrookie
  * @date 2022/8/16 9:28
@@ -52,13 +50,11 @@ public class RedBlackTree <Key extends Comparable<Key>,Value>{
     /**
      * 颜色反转
      * @param h 节点
-     * @return 反转后的节点
      */
-    private NodeTree flipColors(NodeTree h){
+    private void flipColors(NodeTree h){
         h.left.color = BLACK;
         h.right.color = BLACK;
         h.color = RED;
-        return h;
     }
 
     public void put(Key key,Value value){
