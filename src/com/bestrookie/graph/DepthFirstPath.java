@@ -17,6 +17,7 @@ public class DepthFirstPath {
 
     public DepthFirstPath(MyGraph graph, int s){
         this.marked = new boolean[graph.V()];
+        edgeTo = new int[graph.V()];
 
         this.s = s;
 
@@ -51,7 +52,7 @@ public class DepthFirstPath {
             return null;
         }
         MyStack<Integer> path = new MyStack<>();
-        for (int i = v; i != s ; i = edgeTo[v]) {
+        for (int i = v; i != s ; i = edgeTo[i]) {
             path.push(i);
         }
         path.push(s);
