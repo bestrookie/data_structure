@@ -13,10 +13,26 @@ public class DepthFirstOrder {
     private MyStack<Integer> reversePost;
 
     public DepthFirstOrder(Digraph digraph){
+        this.marked = new boolean[digraph.getV()];
+
+        this.reversePost = new MyStack<Integer>();
+
+        for (int i = 0; i < digraph.getV(); i++) {
+            if (!marked[i]){
+                dfs(digraph,i);
+            }
+        }
 
     }
 
     private void dfs(Digraph digraph,int v){
+        marked[v] = true;
+        for (Integer w : digraph.adj(v)) {
+            if (!marked[w]){
+                dfs(digraph,w);
+            }
+        }
+        reversePost.push(v);
 
     }
 
