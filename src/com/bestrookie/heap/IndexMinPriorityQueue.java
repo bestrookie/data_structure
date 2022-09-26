@@ -45,7 +45,7 @@ public class IndexMinPriorityQueue <T extends Comparable<T>>{
 
     }
 
-    private Boolean contains(int k){
+    public Boolean contains(int k){
         return  reverseMap[k] != -1;
     }
 
