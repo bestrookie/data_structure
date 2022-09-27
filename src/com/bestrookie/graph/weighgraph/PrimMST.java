@@ -3,6 +3,8 @@ package com.bestrookie.graph.weighgraph;
 import com.bestrookie.heap.IndexMinPriorityQueue;
 import com.bestrookie.queue.MyQueue;
 
+import java.util.Arrays;
+
 /**
  * @author bestrookie
  * @date 2022/9/26 11:27
@@ -23,9 +25,7 @@ public class PrimMST {
 
         this.distTo = new double[graph.getV()];
 
-        for (int i = 0; i < distTo.length; i++) {
-            distTo[i] = Double.POSITIVE_INFINITY;
-        }
+        Arrays.fill(distTo, Double.POSITIVE_INFINITY);
         this.marked = new boolean[graph.getV()];
 
         pq = new IndexMinPriorityQueue<Double>(graph.getV());
@@ -34,7 +34,7 @@ public class PrimMST {
 
         pq.insert(0,0.0);
 
-        while (pq.isEmpty()){
+        while (!pq.isEmpty()){
             visit(graph,pq.delMin());
         }
 
@@ -73,13 +73,13 @@ public class PrimMST {
     }
 
     //获取最小生成树的所有边
-    private MyQueue<Edge>edges(){
+    public MyQueue<Edge>edges(){
         MyQueue<Edge> allEdges = new MyQueue<>();
         for (Edge edge : edgeTo) {
             if (edge != null) {
                 allEdges.enQueue(edge);
             }
         }
-        return null;
+        return allEdges;
     }
 }

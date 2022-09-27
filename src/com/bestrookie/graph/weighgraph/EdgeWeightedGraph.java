@@ -38,6 +38,7 @@ public class EdgeWeightedGraph {
 
         adj[v].enQueue(edge);
         adj[w].enQueue(edge);
+        E++;
 
     }
 
