@@ -13,8 +13,11 @@ public class UF_Tree_Weighted {
     private int [] sz;
 
     public UF_Tree_Weighted(int N) {
+        //初始化eleAndGroup数组
         this.eleAndGroup = new int[N];
         this.sz = new int[N];
+
+        //初始化分组的数量,默认情况下，有N个分组
         this.count = N;
         for (int i = 0; i < N; i++) {
             this.eleAndGroup[i] = i;
@@ -27,7 +30,7 @@ public class UF_Tree_Weighted {
     }
 
     public Boolean connected(int p , int q){
-        return eleAndGroup[p] == eleAndGroup[q];
+        return find(p) == find(q);
     }
 
     public int find(int p){
@@ -45,12 +48,14 @@ public class UF_Tree_Weighted {
         if (pRoot == qRoot) {
             return;
         }
-        if (sz[pRoot] < sz[qRoot]){
+        //判断proot对应的树大还是qroot对应的树大，最终需要把较小的树合并到较大的树中
+
+        if (sz[pRoot]<sz[qRoot]){
             eleAndGroup[pRoot] = qRoot;
-            sz[qRoot] += sz[qRoot];
-        }else {
+            sz[qRoot]+=sz[pRoot];
+        }else{
             eleAndGroup[qRoot] = pRoot;
-            sz[pRoot] += sz[qRoot];;
+            sz[pRoot]+= sz[qRoot];
         }
         this.count--;
     }
