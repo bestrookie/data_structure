@@ -42,7 +42,7 @@ public class DijkstraSP {
         for (DirectedEdge directedEdge : digraph.adj(v)) {
             int w = directedEdge.to();
 
-            if (disTo[v] + directedEdge.getWeight() < disTo[w]){
+            if (distTo(v) + directedEdge.getWeight() < distTo(w)){
                 disTo[w] = disTo[v] + directedEdge.getWeight();
                 edgeTo[w] = directedEdge;
 
